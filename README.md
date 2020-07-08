@@ -28,6 +28,26 @@ Please forgive us for some error or issue.
 > export AKAMAI_EDGERC_CONFIG="~/.edgerc"
 ```
 
+### Example input data structure
+
+```yaml
+properties:
+  - property_name: test.com
+    property_records:
+      - record_name: test.com.
+        record_type: A
+        record_value: 123.123.124.124
+        record_value_is_akamai_ip: true
+      - record_name: static-test.com.
+        record_type: CNAME
+        record_value: static-test.com.edgekey.net.
+  - property_name: acc.test.com
+    property_records:
+      - record_name: acc.test.com.
+        record_type: CNAME
+        record_value: acc.test.com.edgekey.net.
+```
+
 ### Generate report
 
 ```shell

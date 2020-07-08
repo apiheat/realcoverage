@@ -1,4 +1,4 @@
-FROM amd64/alpine:latest
+FROM alpine:latest
 
 ARG binary_version
 
@@ -8,13 +8,14 @@ RUN apk add --no-cache --update openssl \
         ca-certificates \
         libc6-compat \
         libstdc++ \
+        bind-tools \
         wget \
         curl \
         jq \
         bash \
         nodejs \
-        npm \
-        rm -rf /var/cache/apk/* && \
+        npm && \
+        rm -r -f /var/cache/apk/* && \
     wget --quiet -O /usr/local/bin/akamai https://github.com/akamai/cli/releases/download/1.1.4/akamai-1.1.4-linuxamd64 && \
     chmod +x /usr/local/bin/akamai && \
     echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /root/.bashrc
@@ -34,8 +35,8 @@ RUN akamai install property --force && \
     rm -rf /cli/.akamai-cli/src/akamai-cli-netlist/.git
 RUN akamai install https://github.com/apiheat/akamai-cli-overview --force && \
     rm -rf /cli/.akamai-cli/src/akamai-cli-overview/.git
-# RUN wget --quiet -O /usr/local/bin/realcoverage https://github.com/apiheat/realcoverage/releases/download/v$binary_version/realcoverage_linux_amd64 && \
-#    chmod +x /usr/local/bin/realcoverage
+RUN wget --quiet -O /usr/local/bin/realcoverage https://github.com/apiheat/realcoverage/releases/download/v$binary_version/realcoverage_linux_amd64 && \
+    chmod +x /usr/local/bin/realcoverage
 
 ENV AKAMAI_CLI_HOME=/cli
 VOLUME /cli
