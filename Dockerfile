@@ -33,7 +33,9 @@ RUN akamai install property --force && \
     rm -rf /cli/.akamai-cli/src/akamai-cli-netlist/.git
 RUN akamai install https://github.com/apiheat/akamai-cli-overview --force && \
     rm -rf /cli/.akamai-cli/src/akamai-cli-overview/.git
-RUN wget --quiet -O /usr/local/bin/realcoverage https://github.com/apiheat/realcoverage/releases/download/v0.0.3/realcoverage_linux_amd64 && \
+RUN akamai install https://github.com/apiheat/akamai-cli-diagnostic-tools --force && \
+    rm -rf /cli/.akamai-cli/src/akamai-cli-diagnostic-tools/.git
+RUN wget --quiet -O /usr/local/bin/realcoverage https://github.com/apiheat/realcoverage/releases/download/v0.0.4/realcoverage_linux_amd64 && \
     chmod +x /usr/local/bin/realcoverage
 
 ENV AKAMAI_CLI_HOME=/cli
